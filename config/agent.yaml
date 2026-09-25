@@ -1,0 +1,22 @@
+# Agent Manifest - AgentRegistry static entry point.
+# Root-level keys only; `class` is a single dotted import path.
+# Runtime-tunable parameters live in config/config.yaml, not here.
+
+id: RET-C2-287
+name: Retail Store Spatial Occupancy & Customer Flow Anomaly Alert Agent (WiFi CSI)
+namespace: ret
+version: 0.1.0
+enabled: true
+description: Retail Store Spatial Occupancy & Customer Flow Anomaly Alert Agent (WiFi
+  CSI)
+class: src.graph.graph.RETC2287Graph
+category: Cat 2
+industry: RET
+base_type: RAGAgent
+generation_mode: deterministic
+required_trust_level: INTERNAL
+# Read at boot by src/services/deploy_adapter.py via secrets.require() (baseline store
+# + alert dispatcher). The CI provisional STG deploy uses the documented stand-in instead.
+requires:
+  secrets: ["BASELINE_STORE_API_KEY", "BASELINE_STORE_URL", "ALERT_DISPATCH_TOKEN"]
+  extras: []
